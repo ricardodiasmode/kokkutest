@@ -19,17 +19,14 @@ private:
     Types::GridBox currentBox;
 public:
 
-    Character(Types::CharacterClass characterClass);
+    Character(const Types::CharacterClass characterClass);
     ~Character();
-
-    
+  
     //public GridBox currentBox;
     //public Character Target{ get; set; }
 
 
     bool TakeDamage(float amount);
-
-    int getIndex(vector<Types::GridBox*> v, int index);
 
     void Die();
 

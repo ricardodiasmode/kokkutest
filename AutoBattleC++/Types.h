@@ -10,12 +10,22 @@ public:
         bool ocupied;
         int Index;
 
-        GridBox(int x, int y, bool ocupied, int index)
+        GridBox(int x, int y, bool InOcupied, int index)
         {
             xIndex = x;
             yIndex = y;
-            ocupied = ocupied;
+            ocupied = InOcupied;
             Index = index;
+        }
+        GridBox() {};
+
+        inline bool operator==(const GridBox& rhs)
+        {
+            return this->Index == rhs.Index;
+        }
+        inline bool operator==(const int& rhs)
+        {
+            return this->Index == rhs;
         }
     };
 

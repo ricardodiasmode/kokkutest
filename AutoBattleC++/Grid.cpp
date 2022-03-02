@@ -12,8 +12,7 @@ Grid::Grid(int Lines, int Columns)
 
         for (int j = 0; j < Columns; j++)
         {
-            Types::GridBox* newBox = new Types::GridBox(i, j, false, (Columns * i + j));
-            grids.insert(grids.end(), newBox);
+            grids.push_back(Types::GridBox(i, j, false, (Columns * i + j)));
             //Console.Write($"{newBox.Index}\n");
         }
     }
@@ -31,16 +30,11 @@ void Grid::drawBattlefield(int Lines, int Columns)
     {
         for (int j = 0; j < Columns; j++)
         {
-            Types::GridBox* currentgrid = new Types::GridBox();
+            Types::GridBox* currentgrid = std::find(grids.begin(), grids.end(), yLength*i+j)._Ptr;
             if (currentgrid->ocupied)
-            {
-                //if()
                 printf("[X]\t");
-            }
             else
-            {
                 printf("[ ]\t");
-            }
         }
         printf("\n");
     }
