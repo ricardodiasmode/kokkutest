@@ -21,14 +21,13 @@ public:
 	int currentTurn;
 	int numberOfPossibleTiles;
 
-
 	void Setup();
 
 	void GetPlayerChoice();
 
 	void CreatePlayerCharacter(int classIndex);
 
-	void CreateEnemyCharacter();
+	void CreateEnemyCharacter(const int PlayerClassIndex);
 
 	void StartGame();
 

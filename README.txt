@@ -17,10 +17,10 @@ Requisites:
 
     This program needs to work with these rules:
     
-        - This application is an auto-battle RPG, that has a "grid" with cells/tiles/boxes organized as a matrix.
-        - This grid provides the length for the x and y-axis.
-        - There is also a Character with a Name, Health, BaseDamage, DamageMultiplier, current cell/box, target, and an Index.
-        - Each team should have one move per turn (except when the move places the character in attack range of an opposing team character)
+        //- This application is an auto-battle RPG, that has a "grid" with cells/tiles/boxes organized as a matrix.
+        //- This grid provides the length for the x and y-axis.
+        //- There is also a Character with a Name, Health, BaseDamage, DamageMultiplier, current cell/box, target, and an Index.
+        //- Each team should have one move per turn (except when the move places the character in attack range of an opposing team character)
         - The game should work with a "battlefield" of any size, including a non-square matrix, for example 6x6 or 6x10 tiles in the grid.
         - Make sure all the variables in CHARACTER are engaged in a code feature.
         - The game should inform the player when the battle is over and which team has been declared victorious.

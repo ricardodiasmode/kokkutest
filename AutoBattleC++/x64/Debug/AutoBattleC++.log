@@ -1,7 +1,2 @@
-﻿  AutoBattleC++.cpp
-  BattleField.cpp
-C:\Users\ricar\Desktop\kokkutest\kokkutest\AutoBattleC++\BattleField.cpp(16,51): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  Character.cpp
-  Grid.cpp
-  Generating Code...
+﻿  Character.cpp
   AutoBattleC++.vcxproj -> C:\Users\ricar\Desktop\kokkutest\kokkutest\AutoBattleC++\x64\Debug\AutoBattleC++.exe

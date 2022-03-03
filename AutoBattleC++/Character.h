@@ -8,7 +8,6 @@ class Character
 private:
     float Health;
     float BaseDamage;
-    float DamageMultiplier;
     int PlayerIndex;
 
     Character* target;
@@ -20,28 +19,22 @@ private:
 public:
 
     Character(const Types::CharacterClass characterClass);
-    ~Character();
-  
-    //public GridBox currentBox;
-    //public Character Target{ get; set; }
+    
+    bool TakeDamage(float amount, Grid* battlefield);
 
+    void Die(Grid* battlefield);
 
-    bool TakeDamage(float amount);
-
-    void Die();
-
-    void WalkTo(bool CanWalk);
+    void WalkTo(Grid* battlefield, const int IndexToWalk);
 
     void StartTurn(Grid* battlefield);
 
     bool CheckCloseTargets(Grid* battlefield);
 
-    void Attack(Character* target);
+    void Attack(Character* target, Grid* battlefield);
 
     // Set Functions
     inline void SetHealth(const float HealthToSet) { Health = HealthToSet; }
     inline void SetBaseDamage(const float BaseDamageToSet) { BaseDamage = BaseDamageToSet; }
-    inline void SetDamageMultiplier(const float DamageMultiplierToSet) { DamageMultiplier = DamageMultiplierToSet; }
     inline void SetPlayerIndex(const int PlayerIndexToSet) { PlayerIndex = PlayerIndexToSet; }
     inline void SetTarget(Character* TargetToSet) { target = TargetToSet; }
     inline void SetIsDead(const bool IsDeadToSet) { IsDead = IsDeadToSet; }
@@ -51,7 +44,6 @@ public:
     // Get Functions
     inline const float GetHealth() { return Health; }
     inline const float GetBaseDamage() { return BaseDamage; }
-    inline const float GetDamageMultiplier() { return DamageMultiplier; }
     inline const int GetPlayerIndex() { return PlayerIndex; }
     inline Character* GetTarget() { return target; }
     inline const bool GetIsDead() { return IsDead; }

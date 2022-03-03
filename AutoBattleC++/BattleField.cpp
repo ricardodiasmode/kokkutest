@@ -10,7 +10,7 @@
 
 BattleField::BattleField() {
     
-    grid = new Grid(5, 5);
+    grid = new Grid(5, 5, this);
     AllPlayers = new list<shared_ptr<Character>>();
     int currentTurn = 0;
     int numberOfPossibleTiles = grid->grids.size();
@@ -56,23 +56,60 @@ void BattleField::GetPlayerChoice()
 void BattleField::CreatePlayerCharacter(int classIndex)
 {
     Types::CharacterClass characterClass = (Types::CharacterClass)classIndex;
-    printf("Player Class Choice: {characterClass}");
+
+    char ClassToChar;
+    switch (classIndex)
+    {
+    case 1:
+        ClassToChar = *"P";
+        break;
+    case 2:
+        ClassToChar = *"W";
+        break;
+    case 3:
+        ClassToChar = *"C";
+        break;
+    case 4:
+        ClassToChar = *"A";
+        break;
+    }
+    printf("Player Class Choice: {%c}\n", ClassToChar);
     
     PlayerCharacter = std::make_shared<Character>(characterClass);
 
     PlayerCharacter->SetPlayerIndex(0);
 
-    CreateEnemyCharacter();
+    CreateEnemyCharacter(classIndex);
 
 }
 
-void BattleField::CreateEnemyCharacter()
+void BattleField::CreateEnemyCharacter(const int PlayerClassIndex)
 {
     //randomly choose the enemy class and set up vital variables
     
-    int randomInteger = 1 + rand() % 4;
+    int randomInteger = PlayerClassIndex;
+    while(randomInteger == PlayerClassIndex)
+       randomInteger = 1 + rand() % 4;
     Types::CharacterClass enemyClass = (Types::CharacterClass)randomInteger;
-    printf("Enemy Class Choice: {enemyClass}");
+
+    char ClassToChar;
+    switch (randomInteger)
+    {
+    case 1:
+        ClassToChar = *"P";
+        break;
+    case 2:
+        ClassToChar = *"W";
+        break;
+    case 3:
+        ClassToChar = *"C";
+        break;
+    case 4:
+        ClassToChar = *"A";
+        break;
+    }
+
+    printf("Enemy Class Choice: {%c}\n", ClassToChar);
     EnemyCharacter = std::make_shared<Character>(enemyClass);
 
     PlayerCharacter->SetPlayerIndex(1);
@@ -93,9 +130,8 @@ void BattleField::StartGame()
 void BattleField::StartTurn() 
 {
     if (currentTurn == 0)
-    {
-        //AllPlayers.Sort();  
-    }
+        AllPlayers->sort();
+
     std::list<shared_ptr<Character>>::iterator it;
 
     for (it = AllPlayers->begin(); it != AllPlayers->end(); ++it) {
@@ -108,35 +144,17 @@ void BattleField::StartTurn()
 
 void BattleField::HandleTurn()
 {
-    if (PlayerCharacter->GetHealth() == 0)
-    {
-        return;
-    }
-    else if (EnemyCharacter->GetHealth() == 0)
-    {
-        printf("\n");
+    grid->drawBattlefield(grid->yLength, grid->xLength);
+    printf("Turn %d finished. Click on any key to start the next turn...\n", currentTurn);
+    printf("\n");
 
-        // endgame?
-
-        printf("\n");
-
-        return;
-    }
-    else
-    {
-        printf("\n");
-        printf("Click on any key to start the next turn...\n");
-        printf("\n");
-
-        _getch();
-        StartTurn();
-    }
+    _getch();
+    StartTurn();
 }
 
 void BattleField::AlocatePlayers()
 {
     AlocatePlayerCharacter();
-
 }
 
 void BattleField::AlocatePlayerCharacter()
