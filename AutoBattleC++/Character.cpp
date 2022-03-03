@@ -74,6 +74,7 @@ void Character::StartTurn(Grid* battlefield) {
     else
     {   // if there is no target close enough, calculates in wich direction this character should move to be closer to a possible target
 
+        printf("myXIndex: %d, myYindex: %d\n", currentBox.yIndex, currentBox.xIndex);
         if (currentBox.yIndex > target->currentBox.yIndex)
         {
             // Going left
@@ -88,25 +89,23 @@ void Character::StartTurn(Grid* battlefield) {
         }
         else if (currentBox.xIndex > target->currentBox.xIndex)
         {
-            printf("\nGoing up. xIdx: %d\n", currentBox.xIndex);
             // Going up
             if (currentBox.xIndex > 0)
-                WalkTo(battlefield, currentBox.Index - battlefield->xLength);
+                WalkTo(battlefield, currentBox.Index - battlefield->yLength);
         }
         else if (currentBox.xIndex < target->currentBox.xIndex)
         {
-            printf("\nGoing down. xIdx: %d\n", currentBox.xIndex);
             // Going down
             if (currentBox.xIndex < battlefield->xLength-1)
-                WalkTo(battlefield, currentBox.Index + battlefield->xLength);
+                WalkTo(battlefield, currentBox.Index + battlefield->yLength);
         }
     }
 }
 
 bool Character::CheckCloseTargets(Grid* battlefield)
 {
-    const int UpGridIndex = currentBox.Index - battlefield->xLength;
-    const int DownGridIndex = currentBox.Index + battlefield->xLength;
+    const int UpGridIndex = currentBox.Index - battlefield->yLength;
+    const int DownGridIndex = currentBox.Index + battlefield->yLength;
     const bool ShouldCountDown = DownGridIndex+1 < battlefield->xLength * battlefield->yLength;
     const int LeftGridIndex = currentBox.Index - 1;
     const int RightGridIndex = currentBox.Index + 1;

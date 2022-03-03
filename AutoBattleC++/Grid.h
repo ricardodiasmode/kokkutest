@@ -19,6 +19,6 @@ public:
     int yLength;
     
     // prints the matrix that indicates the tiles of the battlefield
-    void drawBattlefield(int Lines, int Columns);
+    void drawBattlefield();
 };
 

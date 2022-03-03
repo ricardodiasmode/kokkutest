@@ -13,15 +13,12 @@ Grid::Grid(int Lines, int Columns, BattleField* Inbattlefield)
     int CurrentGridIndex = 0;
     for (int i = 0; i < Lines; i++)
     {
-
         for (int j = 0; j < Columns; j++)
         {
             grids.push_back(Types::GridBox(i, j, false, CurrentGridIndex));
             CurrentGridIndex++;
-            //Console.Write($"{newBox.Index}\n");
         }
     }
-	//drawBattlefield(Lines, Columns);
 }
 
 Grid::~Grid() 
@@ -29,12 +26,12 @@ Grid::~Grid()
 
 }
 
-void Grid::drawBattlefield(int Lines, int Columns)
+void Grid::drawBattlefield()
 {
     int CurrentGridIndex = 0;
-    for (int i = 0; i < Lines; i++)
+    for (int i = 0; i < xLength; i++)
     {
-        for (int j = 0; j < Columns; j++)
+        for (int j = 0; j < yLength; j++)
         {
             Types::GridBox* currentgrid = std::find(grids.begin(), grids.end(), CurrentGridIndex)._Ptr;
             CurrentGridIndex++;

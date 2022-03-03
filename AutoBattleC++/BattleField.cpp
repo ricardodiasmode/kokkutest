@@ -10,7 +10,7 @@
 
 BattleField::BattleField() {
     
-    grid = new Grid(5, 5, this);
+    grid = new Grid(5, 7, this);
     AllPlayers = new list<shared_ptr<Character>>();
     int currentTurn = 0;
     int numberOfPossibleTiles = grid->grids.size();
@@ -144,7 +144,7 @@ void BattleField::StartTurn()
 
 void BattleField::HandleTurn()
 {
-    grid->drawBattlefield(grid->yLength, grid->xLength);
+    grid->drawBattlefield();
     printf("Turn %d finished. Click on any key to start the next turn...\n", currentTurn);
     printf("\n");
 
@@ -180,7 +180,6 @@ void BattleField::AlocatePlayerCharacter()
 
 void BattleField::AlocateEnemyCharacter()
 {
-    
     int random = 24;
     auto l_front = grid->grids.begin();
     advance(l_front, random);
@@ -191,12 +190,9 @@ void BattleField::AlocateEnemyCharacter()
         EnemyCurrentLocation = &*l_front;
         l_front->ocupied = true;
         EnemyCharacter->SetCurrentBox(*l_front);
-        grid->drawBattlefield(5, 5);
     }
     else
     {
         AlocateEnemyCharacter();
     }
-
-
 }
