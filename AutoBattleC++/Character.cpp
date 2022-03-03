@@ -60,6 +60,8 @@ void Character::Die(Grid* battlefield)
 
 void Character::WalkTo(Grid* battlefield, const int IndexToWalk)
 {
+    if (IndexToWalk > battlefield->grids.size())
+        return;
     currentBox.ocupied = false;
     battlefield->grids[currentBox.Index] = currentBox;
 
@@ -73,8 +75,6 @@ void Character::StartTurn(Grid* battlefield) {
         Attack(Character::target, battlefield);
     else
     {   // if there is no target close enough, calculates in wich direction this character should move to be closer to a possible target
-
-        printf("myXIndex: %d, myYindex: %d\n", currentBox.yIndex, currentBox.xIndex);
         if (currentBox.yIndex > target->currentBox.yIndex)
         {
             // Going left
@@ -141,8 +141,53 @@ bool Character::CheckCloseTargets(Grid* battlefield)
     return false;
 }
 
+void Character::SetAttacks(Character* target, Grid* battlefield)
+{
+    const bool ShouldPush = rand() % 2; // Random number between 0 and 1
+    if (!ShouldPush)
+        return;
+
+    // Getting target direction
+    const bool TargetIsUp = target->currentBox.xIndex < currentBox.xIndex;
+    const bool TargetIsDown = target->currentBox.xIndex > currentBox.xIndex;
+    const bool TargetIsLeft = target->currentBox.yIndex < currentBox.yIndex;
+    const bool TargetIsRight = target->currentBox.yIndex > currentBox.yIndex;
+
+    // Actually pushing
+    if (TargetIsUp)
+    {
+        // Whether or not can push up
+        if (target->currentBox.xIndex > 0)
+        {
+            target->WalkTo(battlefield, target->currentBox.xIndex - battlefield->yLength);
+            return;
+        }
+    }
+    else if (TargetIsDown)
+    {
+        // Whether or not can push down
+        if (target->currentBox.xIndex < battlefield->xLength - 1)
+        {
+            target->WalkTo(battlefield, target->currentBox.Index + battlefield->yLength);
+            return;
+        }
+    }
+    // If could not push up neither down, try to push left/right
+    if (TargetIsLeft)
+    {
+        if (target->currentBox.yIndex > 0)
+            target->WalkTo(battlefield, target->currentBox.Index - 1);
+    }
+    else if (TargetIsRight)
+    {
+        if (target->currentBox.yIndex < battlefield->yLength - 1)
+            target->WalkTo(battlefield, target->currentBox.Index + 1);
+    }
+}
+
 void Character::Attack(Character* target, Grid* battlefield)
 {
+    SetAttacks(target, battlefield);
     target->TakeDamage(GetBaseDamage(), battlefield);
 }
 

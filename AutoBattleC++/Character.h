@@ -32,6 +32,8 @@ public:
 
     void Attack(Character* target, Grid* battlefield);
 
+    void SetAttacks(Character* target, Grid* battlefield);
+
     // Set Functions
     inline void SetHealth(const float HealthToSet) { Health = HealthToSet; }
     inline void SetBaseDamage(const float BaseDamageToSet) { BaseDamage = BaseDamageToSet; }

@@ -26,7 +26,7 @@ Requisites:
         //- The game should inform the player when the battle is over and which team has been declared victorious.
         //- The battlefield should only be reprinted/redrawn if a player makes a move.
         //- Each character should look for a possible target and attack it when this is viable and if not, move closer into attack range.
-        - Each candidate must also implement one of the following extra features in the application, to be selected depending on their month of birth.
+        //- Each candidate must also implement one of the following extra features in the application, to be selected depending on their month of birth.
 	//- Characters cannot be on the same tile at the same time.
 
         Please, document EVERY change you make on the code. Bear in mind we are going to look into how you're able to optimize, organize and refactor.
